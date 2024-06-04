@@ -1,0 +1,93 @@
+server:
+  port: 8090
+
+blog:
+  api: 'http://localhost:${server.port} '
+  cms: http://localhost:8080
+  name: Naccl's Blog
+  view: http://localhost:8081
+
+comment:
+  default-open: true
+  notify:
+    channel: mail
+
+http:
+  proxy:
+    server:
+      host: 127.0.0.1
+      port: 7890
+      timeout: 10000
+
+logging:
+  file: blog-api/log/blog-dev
+  level:
+    root: info
+    top:
+      naccl: debug
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nblog?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 111111
+
+  mail:
+    host: 3171476310@qq.com
+    password: 123456
+    port: 465
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+          ssl:
+            enable: true
+    username: admin@example.com
+
+  redis:
+    database: 0
+    host: localhost
+    password: ''
+    port: 6379
+    timeout: 10000ms
+
+tg:
+  bot:
+    api: 'https://api.telegram.org/bot '
+    chat-id: 1234567890
+    reverse-proxy-url: 'https://tg-api-open.naccl.workers.dev '
+    token: 1234567890:qwertyuiopasdfghjklzxcvbnm
+    use-proxy: false
+    use-reverse-proxy: true
+
+token:
+  expireTime: 259200000
+  secretKey: abcdefghijklmnopqrstuvwxyz
+
+upload:
+  channel: local
+  file:
+    access-path: /image/**
+    path: /Users/naccl/Desktop/upload/
+    resources-locations: file:${upload.file.path}
+
+  github:
+    repos: test
+    repos-path: /comment/avatar
+    token: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    username: Naccl
+
+  upyun:
+    bucket-name: nblog
+    domain: 'https://cdn.example.com '
+    password: xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    path: /comment/avatar
+    username: naccl
